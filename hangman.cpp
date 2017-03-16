@@ -29,8 +29,10 @@ int main()
 	inWords.open("corncob_caps.txt", ios::in);
 	vector<string> wordVector;
 		if (inWords.is_open())								//make sure input file opened properly
-		{		while(!inWords.eof())					//put every word listed in the file into an array to make program speedy
-				{	string word = "";
+		{	
+			while(!inWords.eof())					//put every word listed in the file into an array to make program speedy
+				{	
+					string word = "";
 					getline(inWords, word);
 					wordVector.push_back(word);
 				}//end for
@@ -39,7 +41,8 @@ int main()
 										{0,0} };
 
 				while (true) 									//make the game run until a sentinel value calls break;
-				{	int randNum = randomInteger();
+				{	
+					int randNum = randomInteger();
 					
 					
 						#ifdef WIN32  //unix for some reason compiles a whitespace character at the end of this string
@@ -66,67 +69,79 @@ int main()
 					int testPass = 0;
 					string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 						for (int numOfGuesses = firstNumOfGuesses; numOfGuesses > 0; --numOfGuesses)
-						{	string guess = "";	
+						{	
+							string guess = "";	
 							char fullGuess = ' ';
 							char goodGuess = 'N';
 							
 							
 								while (guess == "")
-								{	++testPass;
+								{	
+									++testPass;
 									guess = ""; 
 								 	getline(cin, guess);
 									transform(guess.begin(), guess.end(), guess.begin(), ::toupper);
 									char onlyLetters = 'Y'; //set to Y - if unaltered, indicates that menu-call has not ocurred
 									
 										if (guess == "!END")//checks for sentinel value
-										{	inWords.close();
+										{	
+											inWords.close();
 											return 0;
 										}//end returnIF
 										
 										if (guess == "!MENU")
-										{	menuCoutBlock(answerClue);
+										{	
+											menuCoutBlock(answerClue);
 																						
 											guess = "";//ensures it will ask for another guess without registering '!' as the guess
 											onlyLetters = 'M';//prevents onlyLetters error from triggering, 'M' for menu
 										}//end menuIF
 										
 										if(guess == "!WORD")
-										{	cout 
+										{	
+											cout 
 											<< endl << "Okay! If you guess the full word you win! If you don't, you lose! Enter the full word below!"
 											<< endl;
 											onlyLetters = ' ';
 												while (onlyLetters != 'Y')
-												{	getline(cin, guess);
+												{	
+													getline(cin, guess);
 													transform(guess.begin(), guess.end(), guess.begin(), ::toupper);
 													
 														if (guess == "!END")
-														{	inWords.close();
+														{	
+															inWords.close();
 															return 0;
 														}// end returnIF
 
 													checkForOnlyLetters(guess, onlyLetters)	;
 																											
 														if (guess.length() > answer.length())
-														{	cout
+														{	
+															cout
 															<< endl << "Guess is too Long! The word is " << answer.length() << " letters!"
 															<< endl;
 																if (onlyLetters == 'L')
-																{	cout
+																{	
+																	cout
 																	<< endl << "You took the long route again! Now Ascii's neck will be longer..."
 																	<< endl;
 																	break;
 																}
 																else
-																{	onlyLetters = 'L';
+																{	
+																	onlyLetters = 'L';
 																}//end inner l_onlyLettersIF
 														}
 														else if (guess.length() < answer.length())
-														{	cout
+														{	
+															cout
 															<< endl << "Guess is too Short! The word is " << answer.length() << " letters!"
 															<< endl;
 															
 																if (onlyLetters == 'H')
-																{	cout
+																{	
+																	cout
 																	<< endl << "Not again! Now Ascii will have a short drop and a sudden stop..."
 																	<< endl;
 																	break;
@@ -137,20 +152,23 @@ int main()
 																}//end inner h_onlyLettersIF
 														}
 														else if (onlyLetters != 'N')
-														{	onlyLetters = 'Y';
+														{	
+															onlyLetters = 'Y';
 														}//end all_onlyLettersIF									
 												}//end y_onlyLettersWHILE
 											
-											cout << guess << endl;
+											//cout << guess << endl;
 												if (guess != answer)
-												{	cout
+												{	
+													cout
 													<< endl << "Oh no! The correct answer is " + answer + "! You lose!"
 													<< endl << endl;
 													fullGuess = 'N';
 													++scoreBoard[1][1];		//losses by full guess
 												}
 												else
-												{	cout
+												{	
+													cout
 													<< endl << "That's right! You win! The answer is " + answer + "!"
 													<< endl << endl;
 													fullGuess = 'Y';
@@ -160,7 +178,8 @@ int main()
 										}
 										
 										if (guess == "!SCORE")//checks for score call
-										{	cout 
+										{	
+											cout 
 											<< endl
 											<< "You've won " << scoreBoard[0][0] << " times by letter guess."
 											<< endl
@@ -176,18 +195,23 @@ int main()
 										}
 										
 										if (onlyLetters == 'Y')
-										{	checkForOnlyLetters(guess, onlyLetters);
+										{	
+											checkForOnlyLetters(guess, onlyLetters);
 											
 											if (onlyLetters == 'N') //if non-letters are detected, triggers error
-											{	cout
+											{	
+												cout
 												<< endl << "Only letters are allowed!"
 												<< endl;
 												guess = "";
 											}
 											else 
-											{		for (int pong = answer.length(); pong > -1; pong --) //replace each dash with a correct letter
-													{		if (answer.substr(pong, 1) == guess.substr(0,1))
-															{	answerClue.replace(pong, 1, guess.substr(0,1));
+											{	
+													for (int pong = answer.length(); pong > -1; pong --) //replace each dash with a correct letter
+													{		
+															if (answer.substr(pong, 1) == guess.substr(0,1))
+															{	
+																answerClue.replace(pong, 1, guess.substr(0,1));
 																goodGuess = 'Y';
 															}//end if
 													}//end pongFor
@@ -199,7 +223,8 @@ int main()
 							
 								
 								if (fullGuess == 'Y')
-								{	break;//breaks out of numOfGuessesFOR
+								{	
+									break;//breaks out of numOfGuessesFOR
 								}
 								else if (fullGuess == 'N')
 								{
@@ -222,25 +247,29 @@ int main()
 								
 								
 								if (goodGuess == 'Y')
-								{	numOfGuesses += 1;
+								{	
+									numOfGuesses += 1;
 								}//end goodGuessIF
 								
 								
 								if (answerClue == answer)
-								{	cout
+								{	
+									cout
 									<< endl << "You have guessed the final letters! The answer is " + answer + '!'
 									<< endl << endl;
 									++scoreBoard[0][0];		//wins by letter guess
 									break;//breaks numOfGuessesFOR
 								}
 								else if (numOfGuesses == 1)
-								{ cout
+								{ 
+									cout
 									<< endl << "That was your last guess! The answer was " + answer + '!'
 									<< endl << endl;
 									++scoreBoard[1][0];		//losses by letter guess
 								}
 								else
-								{	cout
+								{	
+									cout
 									<< endl << answerClue
 									<< endl << "You have " << numOfGuesses-1 << " guesses left."
 									<< endl;
@@ -249,7 +278,8 @@ int main()
 								
 								
 								if (numOfGuesses == firstNumOfGuesses && ifOne == false)
-								{	cout	<< "                                          "
+								{	
+									cout	<< "                                          "
 									<< endl << "                  -----                   "
 									<< endl << "                  |  \\|                   "
 									<< endl << "                  |   |                   "
@@ -261,7 +291,8 @@ int main()
 									ifOne = true;
 								}
 								else if (numOfGuesses >= (firstNumOfGuesses / 3) * 2 && numOfGuesses < firstNumOfGuesses && ifTwo == false)//if greater than 2/3 but less than 100%
-								{	cout	<< "                                          "
+								{	
+									cout	<< "                                          "
 									<< endl	<< "                  -----                   "
 									<< endl	<< "                  |  \\|                   "
 									<< endl	<< "                  |   |                   "
@@ -273,7 +304,8 @@ int main()
 									ifTwo = true;
 								}
 								else if (numOfGuesses >= (firstNumOfGuesses / 3) && numOfGuesses < (firstNumOfGuesses / 3) * 2 && ifThree == false)//if > than 1/3 but < 2/3
-								{	cout	<< "                                          "
+								{	
+									cout	<< "                                          "
 									<< endl << "                  -----                   "
 									<< endl << "                  |  \\|                   "
 									<< endl << "                  |   |                   "
@@ -285,7 +317,8 @@ int main()
 									ifThree = true;
 								}
 								else if ((numOfGuesses == 2 && ifFour == false) || (numOfGuesses > 1 && numOfGuesses < (firstNumOfGuesses / 3) && ifFour == false))//if greater than 1 but less than 1/3
-								{	cout	<< "                                          "
+								{	
+									cout	<< "                                          "
 									<< endl << "                  -----                   "
 									<< endl << "                  |  \\|                   "
 									<< endl << "                  |   |                   "
@@ -297,7 +330,8 @@ int main()
 									ifFour = true;
 								}
 								else if (numOfGuesses == 1)
-								{	cout	<< "                                          "
+								{	
+									cout	<< "                                          "
 									<< endl << "                  -----                   "
 									<< endl << "                  |  \\|                   "
 									<< endl << "                  |   |                   "
@@ -312,7 +346,8 @@ int main()
 				}//end trueWhile
 		}//if
 		else
-		{	cout << "Error! Words file could not be found." << endl;
+		{	
+			cout << "Error! Words file could not be found." << endl;
 		}//end openIf
 		
 	inWords.close();
@@ -323,7 +358,8 @@ int main()
 void checkForOnlyLetters(string g, char &oL)
 {
 	for (int ping = g.length()-1; ping > -1; ping --)
-	{		if (g.substr(ping, 1) > "Z" || g.substr(ping, 1) < "A")
+	{		
+			if (g.substr(ping, 1) > "Z" || g.substr(ping, 1) < "A")
 			{	oL = 'N';
 				cout
 				<< endl << "Word must be only letters!"
@@ -350,9 +386,12 @@ void menuCoutBlock(string clue)
 }
 
 void findDeleteLetters(string g, string &abc)
-{	char ch = g[0];
+{	
+	char ch = g[0];
+	
 		while (abc.find(ch, 0) != std::string::npos)
-		{	abc.erase(abc.find(ch, 0), 1);
+		{	
+			abc.erase(abc.find(ch, 0), 1);
 		}
 	cout 
 	<< endl << "Available letters: " << abc;
@@ -361,25 +400,31 @@ void findDeleteLetters(string g, string &abc)
 }
 
 void bubbleSortLetters(string &lets)
-{	char sntnl = 'N';
-	while(sntnl == 'N')
-	{	sntnl = 'Y';
-		for (int i = lets.length() - 1; i > 0; --i)
-		{	if (lets.substr(i,1) < lets.substr(i-1,1))
-			{	string plH = lets.substr(i,1);
-				lets.replace(i, 1, lets, i-1 ,1);
-				lets.replace(i-1, 1, plH, 0, 1);
-				sntnl = 'N';
-			}//end if
-		}//end for
-	}//end while
+{	
+	char sntnl = 'N';
+	
+		while(sntnl == 'N')
+		{	
+			sntnl = 'Y';
+			for (int i = lets.length() - 1; i > 0; --i)
+			{	
+				if (lets.substr(i,1) < lets.substr(i-1,1))
+				{	
+					string plH = lets.substr(i,1);
+					lets.replace(i, 1, lets, i-1 ,1);
+					lets.replace(i-1, 1, plH, 0, 1);
+					sntnl = 'N';
+				}//end if
+			}//end for
+		}//end while
 	cout
 	<< endl << "     Used letters: " << lets
 	<< endl;
 }
 
 int randomInteger()
-{	srand(static_cast<int>(time(0)));
+{	
+	srand(static_cast<int>(time(0)));
 	int rndmInt = 0 + rand() % (58108 - 0 + 0);
 	return rndmInt;
 }
