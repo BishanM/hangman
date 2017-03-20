@@ -17,6 +17,7 @@
 using namespace std;
 
 void checkForOnlyLetters(string g, char &oL);
+void checkForProperGuessLength(string G_uess, string A_nswer, char &O_nlyLetters);
 void menuCoutBlock(string clue);
 void findDeleteLetters(string g, string &abc);
 void bubbleSortLetters(string &lets);
@@ -68,7 +69,7 @@ int main()
 					
 					menuCoutBlock(answerClue);
 					
-					cout << answer << endl;
+					//cout << answer << endl;
 					
 					bool ifOne = false;
 					bool ifTwo = false;
@@ -139,7 +140,7 @@ int main()
 														// This will set onlyLetters to 'N' if it 
 														// finds any non-letters									
 														
-														//checkForProperGuessLength();
+														checkForProperGuessLength(guess, answer, onlyLetters);
 														// This will set onlyLetters to 'L' if guess
 														// is too long, and if it's already set to 'L',
 														// it will trigger a loss. Does the same if the
@@ -147,49 +148,7 @@ int main()
 														// sets onlyLetters to 'Y' if it has not been set
 														// to 'N' above. Hmm... Should probably switch 
 														// the position of these for simplification.
-														//{
-													
-														if (guess.length() > answer.length())
-														{	
-															cout
-															<< endl << "Guess is too Long! The word is " << answer.length() << " letters!"
-															<< endl;
-																if (onlyLetters == 'L')
-																{	
-																	cout
-																	<< endl << "You took the long route again! Now Ascii's neck will be longer..."
-																	<< endl;
-																	break;//breaks out of y_onlyLettersWHILE
-																}
-																else
-																{	
-																	onlyLetters = 'L';
-																}//end inner l_onlyLettersIF
-														}
-														else if (guess.length() < answer.length())
-														{	
-															cout
-															<< endl << "Guess is too Short! The word is " << answer.length() << " letters!"
-															<< endl;
-															
-																if (onlyLetters == 'H')
-																{	
-																	cout
-																	<< endl << "Not again! Now Ascii will have a short drop and a sudden stop..."
-																	<< endl;
-																	break;//breaks out of y_onlyLettersWHILE
-																}
-																else
-																{
-																	onlyLetters = 'H';
-																}//end inner h_onlyLettersIF
-														}
-														else if (onlyLetters != 'N')
-														{	
-															onlyLetters = 'Y';
-														}//end all_onlyLettersIF
-													
-														//} //end checkForProperGuessLength();
+														
 													
 													//} //end getValidInputForGuess();
 													
@@ -408,6 +367,49 @@ int main()
 	inWords.close();
 	
 	return 0;
+}
+
+void checkForProperGuessLength(string G_uess, string A_nswer, char &O_nlyLetters)
+{
+		if (G_uess.length() > A_nswer.length())
+		{	
+			cout
+			<< endl << "Guess is too Long! The word is " << A_nswer.length() << " letters!"
+			<< endl;
+				if (O_nlyLetters == 'L')
+				{	
+					cout
+					<< endl << "You took the long route again! Now Ascii's neck will be longer..."
+					<< endl;
+					break;//breaks out of y_onlyLettersWHILE
+				}
+				else
+				{	
+					O_nlyLetters = 'L';
+				}//end inner l_onlyLettersIF
+		}//if
+		else if (G_uess.length() < A_nswer.length())
+		{	
+			cout
+			<< endl << "Guess is too Short! The word is " << A_nswer.length() << " letters!"
+			<< endl;
+
+				if (O_nlyLetters == 'H')
+				{	
+					cout
+					<< endl << "Not again! Now Ascii will have a short drop and a sudden stop..."
+					<< endl;
+					break;//breaks out of y_onlyLettersWHILE
+				}
+				else
+				{
+					O_nlyLetters = 'H';
+				}//end inner h_onlyLettersIF
+		}
+		else if (O_nlyLetters != 'N')
+		{	
+			O_nlyLetters = 'Y';
+		}//end all_onlyLettersIF
 }
 
 void checkForOnlyLetters(string g, char &oL)
