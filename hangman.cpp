@@ -381,7 +381,7 @@ void checkForProperGuessLength(string G_uess, string A_nswer, char &O_nlyLetters
 					cout
 					<< endl << "You took the long route again! Now Ascii's neck will be longer..."
 					<< endl;
-					break;//breaks out of y_onlyLettersWHILE
+					O_nlyLetters = '\n';//breaks out of y_onlyLettersWHILE
 				}
 				else
 				{	
@@ -399,7 +399,7 @@ void checkForProperGuessLength(string G_uess, string A_nswer, char &O_nlyLetters
 					cout
 					<< endl << "Not again! Now Ascii will have a short drop and a sudden stop..."
 					<< endl;
-					break;//breaks out of y_onlyLettersWHILE
+					O_nlyLetters = '\n';//breaks out of y_onlyLettersWHILE
 				}
 				else
 				{
