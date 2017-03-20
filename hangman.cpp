@@ -148,6 +148,8 @@ int main()
 														// sets onlyLetters to 'Y' if it has not been set
 														// to 'N' above. Hmm... Should probably switch 
 														// the position of these for simplification.
+														if (onlyLetters == '\n')
+														{break;}//end breakIF
 														
 													
 													//} //end getValidInputForGuess();
