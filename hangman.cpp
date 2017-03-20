@@ -436,9 +436,9 @@ void menuCoutBlock(string clue)
 	<< endl 
 	<< endl << "Type    !word     to guess the full word."
 	<< endl 
-	<< endl << "Type    !score  to get win/loss stats."
+	<< endl << "Type    !score    to get win/loss stats."
 	<< endl 
-	<< endl << "Type    !end     to end."
+	<< endl << "Type    !end      to end."
 	<< endl 
 	<< endl << "Type    !menu     to repeat this menu!"
 	<< endl << clue
