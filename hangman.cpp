@@ -16,6 +16,7 @@
 
 using namespace std;
 
+void isFullGuessRightOrWrong(string G_uess, string A_nswer, char &F_ullGuess, int (&S_coreBoard)[2][2], char &O_nlyLetters);
 void checkForOnlyLetters(string g, char &oL);
 void checkForProperGuessLength(string G_uess, string A_nswer, char &O_nlyLetters);
 void menuCoutBlock(string clue);
@@ -157,29 +158,14 @@ int main()
 												}//end y_onlyLettersWHILE
 											
 											//cout << guess << endl;
-												if (guess != answer)
-												{	
-													cout
-													<< endl << "Oh no! The correct answer is " + answer + "! You lose!"
-													<< endl << endl;
-													
-													fullGuess = 'N';
-													++scoreBoard[1][1];
-													//losses by full guess
-												}//if
-												else
-												{	
-													cout
-													<< endl << "That's right! You win! The answer is " + answer + "!"
-													<< endl << endl;
-													
-													fullGuess = 'Y';
-													++scoreBoard[0][1];
-													//wins by full guess
-												}//end inner if
-											onlyLetters = 'W';
-											// prevents onlyLetters error from 
-											// triggering, 'W' for word guess
+											isFullGuessRightOrWrong(guess, answer, fullGuess, scoreBoard, onlyLetters);
+											//Compares the guess to the answer. If inequal, displays a loss message, 
+											//displays the correct answer, changes fullGuess to 'N', and increments the 
+											//losses by full guess scoreboard value. If equal, displays a win message,
+											//confirms the correct answer, changes fullguess to 'Y', and increments the
+											//scoreBoard wins by full guess value.
+											//Afterword, it changes onlyLetters to 'W' to prevent an onlyLetters error
+											//from getting triggered.
 										}//end !wordIF
 										
 										if (guess == "!SCORE")
@@ -369,6 +355,35 @@ int main()
 	inWords.close();
 	
 	return 0;
+}
+
+void isFullGuessRightOrWrong(string G_uess, string A_nswer, char &F_ullGuess, int (&S_coreBoard)[2][2], char &O_nlyLetters)
+{
+		if (G_uess != A_nswer)
+		{	
+			cout
+			<< endl << "Oh no! The correct answer is " + A_nswer + "! You lose!"
+			<< endl << endl;
+
+			F_ullGuess = 'N';
+			++S_coreBoard[1][1];
+			//cout << S_coreBoard[1][1];
+			//losses by full guess
+		}//if
+		else
+		{	
+			cout
+			<< endl << "That's right! You win! The answer is " + A_nswer + "!"
+			<< endl << endl;
+
+			F_ullGuess = 'Y';
+			++S_coreBoard[0][1];
+			//cout << S_coreBoard[0][1];
+			//wins by full guess
+		}//end inner if
+	O_nlyLetters = 'W';
+	// prevents onlyLetters error from 
+	// triggering, 'W' for word guess
 }
 
 void checkForProperGuessLength(string G_uess, string A_nswer, char &O_nlyLetters)
