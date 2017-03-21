@@ -51,13 +51,13 @@ int main()
 					
 					
 						#ifdef WIN32  
-							// unix/mac for some reason compiles a whitespace 
-							// character(?) at the end of this string. I think
-							// it has to do with the C way of making a string
-							// as an array of char's with the last char being
-							// '\n' - pure speculation. It doesn't appear when
-							// the string is displayed, but it counts as part
-							// of the length when using answer.length();
+							/* unix/mac for some reason compiles a whitespace 
+							character(?) at the end of this string. I think
+							it has to do with the C way of making a string
+							as an array of char's with the last char being
+							'\n' - pure speculation. It doesn't appear when
+							the string is displayed, but it counts as part
+							of the length when using answer.length();*/
 							string answer = wordVector.at(randNum);
 						#else 
 							string answer = wordVector.at(randNum);
@@ -138,17 +138,17 @@ int main()
 													//{
 														
 														checkForOnlyLetters(guess, onlyLetters)	;
-														// This will set onlyLetters to 'N' if it 
-														// finds any non-letters									
+														/* This will set onlyLetters to 'N' if it 
+														finds any non-letters	*/								
 														
 														checkForProperGuessLength(guess, answer, onlyLetters);
-														// This will set onlyLetters to 'L' if guess
-														// is too long, and if it's already set to 'L',
-														// it will trigger a loss. Does the same if the
-														// guess is too short, sets to 'S'. Otherwise, 
-														// sets onlyLetters to 'Y' if it has not been set
-														// to 'N' above. Hmm... Should probably switch 
-														// the position of these for simplification.
+														/* This will set onlyLetters to 'L' if guess
+														 is too long, and if it's already set to 'L',
+														 it will trigger a loss. Does the same if the
+														 guess is too short, sets to 'S'. Otherwise, 
+														 sets onlyLetters to 'Y' if it has not been set
+														 to 'N' above. Hmm... Should probably switch 
+														 the position of these for simplification.*/
 														if (onlyLetters == '\n')
 														{break;}//end breakIF
 														
@@ -159,13 +159,13 @@ int main()
 											
 											//cout << guess << endl;
 											isFullGuessRightOrWrong(guess, answer, fullGuess, scoreBoard, onlyLetters);
-											//Compares the guess to the answer. If inequal, displays a loss message, 
-											//displays the correct answer, changes fullGuess to 'N', and increments the 
-											//losses by full guess scoreboard value. If equal, displays a win message,
-											//confirms the correct answer, changes fullguess to 'Y', and increments the
-											//scoreBoard wins by full guess value.
-											//Afterword, it changes onlyLetters to 'W' to prevent an onlyLetters error
-											//from getting triggered.
+											/*Compares the guess to the answer. If inequal, displays a loss message, 
+											displays the correct answer, changes fullGuess to 'N', and increments the 
+											losses by full guess scoreboard value. If equal, displays a win message,
+											confirms the correct answer, changes fullguess to 'Y', and increments the
+											scoreBoard wins by full guess value.
+											Afterword, it changes onlyLetters to 'W' to prevent an onlyLetters error
+											from getting triggered.*/
 										}//end !wordIF
 										
 										if (guess == "!SCORE")
@@ -205,11 +205,12 @@ int main()
 													for (int pong = answer.length(); pong > -1; pong --) 
 													{		
 															if (answer.substr(pong, 1) == guess.substr(0,1))
-															{	// if the letter is correct, replace the 
-																// corresponding dash in the hint with it.
+															{	/* If the letter is correct, replace the 
+																corresponding dash in the hint with it.*/
 																answerClue.replace(pong, 1, guess.substr(0,1));
 																goodGuess = 'Y';
 															}//end if
+														
 													}//end pongFor
 												
 											}//end n_onlyLettersIF
@@ -225,8 +226,8 @@ int main()
 									break;//breaks out of numOfGuessesFOR
 								}
 								else if (fullGuess == 'N')
-								{	// displays Ascii's untimely demise
-									// if you guessed the full word wrong
+								{	/* Displays Ascii's untimely demise
+									if you guessed the full word wrong*/
 									cout	<< "                                          "
 									<< endl << "                  -----                   "
 									<< endl << "                  |  \\|                   "
